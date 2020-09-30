@@ -47,10 +47,16 @@ class ViewController: UIViewController {
                     
                     do {
                         
-                       let jsonResponse = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers)
+                        let jsonResponse = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers) as! Dictionary<String, Any>
                         
                         DispatchQueue.main.async {
-                            print(jsonResponse)
+                           
+                            if let rates = jsonResponse["rates"] as? [String : Double] {
+                                
+                                let cad = rates["CAD"]
+                                self.cadLabel.text = String(cad!)
+                            }
+                            
                         }
                     } catch {
                         
