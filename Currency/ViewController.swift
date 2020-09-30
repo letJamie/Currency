@@ -35,7 +35,7 @@ class ViewController: UIViewController {
                 
                 let alert = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: UIAlertController.Style.alert)
                 
-                let OKButton = UIAlertAction(title: : "OK", style: UIAlertAction.Style.default, handler: nil)
+                let OKButton = UIAlertAction(title: "ok", style: UIAlertAction.Style.default, handler: nil)
                 
                 alert.addAction(OKButton)
                 self.present(alert, animated: true, completion: nil)
@@ -43,9 +43,26 @@ class ViewController: UIViewController {
             
             else {
                 
+                if data != nil {
+                    
+                    do {
+                        
+                       let jsonResponse = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers)
+                        
+                        DispatchQueue.main.async {
+                            print(jsonResponse)
+                        }
+                    } catch {
+                        
+                        print("error")
+                    }
+                    
+                }
                 
             }
         }
+        
+        task.resume()
     }
     
 }
